@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from IPython.display import HTML
 from tqdm.notebook import tqdm, trange
-from riemann import rk1d
+from clawpack.riemann.euler_1D_py import euler_hllc_1D
 import numpy as np
 import scipy.io
 import os
@@ -111,3 +111,46 @@ def load_data_euler(path: str = "./1DEuler_data.npy", device: torch.device = "cp
     data['Phi_mass0'] = to_tensor(x_m0, t_m0).requires_grad_(True)
     data['rho_int0'] = torch.tensor(rho_int, dtype=torch.float32, device=device)
     return data
+
+def sod_hllc_solution(x, t, left, right, gamma=1.4, x0=0.0):
+    """
+    Approximate Sod-tube via HLLC at (t,x).
+    Returns rho,u,p as shape (len(t),len(x)).
+    """
+    rho_l,u_l,p_l = left
+    rho_r,u_r,p_r = right
+    # build conserved:
+    E_l = p_l/(gamma-1) + 0.5*rho_l*u_l**2
+    E_r = p_r/(gamma-1) + 0.5*rho_r*u_r**2
+
+    # pack into 3×1 for solver:
+    ql = np.array([[rho_l, rho_l*u_l, E_l]]).T
+    qr = np.array([[rho_r, rho_r*u_r, E_r]]).T
+    aux = None
+    prob = {'gamma':gamma, 'gamma1':1-gamma}
+
+    nt, nx = len(t), len(x)
+    rho = np.zeros((nt,nx)); u = np.zeros_like(rho); p = np.zeros_like(rho)
+
+    for i, ti in enumerate(t):
+        xi = (x - x0)/ (ti if ti>0 else 1e-8)
+        # repeat ql, qr across all xi:
+        Ql = np.repeat(ql[:,:,None], nx, axis=2)
+        Qr = np.repeat(qr[:,:,None], nx, axis=2)
+        wave, s, amdq, apdq = euler_hllc_1D(Ql, Qr, aux, aux, prob)
+        # wave[:,0,:] = left‐star, wave[:,1,:] = right‐star
+        s_l, s_m, s_r = s
+        for j, zij in enumerate(xi):
+            if zij < s_l[j]:
+                r,u_,pp = rho_l, u_l, p_l
+            elif zij < s_m[j]:
+                q = wave[:,0,j] + Ql[:,0,j]
+                r,u_,pp = q[0], q[1]/q[0], (gamma-1)*(q[2] - 0.5*q[1]**2/q[0])
+            elif zij < s_r[j]:
+                q = wave[:,1,j] + wave[:,0,j] + Ql[:,0,j]
+                r,u_,pp = q[0], q[1]/q[0], (gamma-1)*(q[2] - 0.5*q[1]**2/q[0])
+            else:
+                r,u_,pp = rho_r, u_r, p_r
+            rho[i,j], u[i,j], p[i,j] = r, u_, pp
+
+    return rho, u, p
