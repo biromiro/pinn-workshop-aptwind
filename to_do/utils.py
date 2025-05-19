@@ -7,6 +7,7 @@ from matplotlib.animation import FuncAnimation
 from IPython.display import HTML
 from tqdm.notebook import tqdm, trange
 import numpy as np
+import jupyter
 import scipy.io
 import os
 import sys
