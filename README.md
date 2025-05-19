@@ -39,8 +39,8 @@ Optional but recommended:
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/yourusername/pinn-workshop.git
-   cd pinn-workshop
+   git clone https://github.com/biromiro/pinn-workshop-aptwind.git
+   cd pinn-workshop-aptwind
    ```
 
 2. **Create and activate a virtual environment**
@@ -67,13 +67,13 @@ Optional but recommended:
    Otherwise, install packages directly:
 
    ```bash
-   pip install torch numpy scipy matplotlib tqdm jupyter
+   pip install torch numpy scipy matplotlib tqdm jupyter ipywidgets widgetsnbextension
    ```
 
    or, with conda:
 
    ```bash
-   conda install torch numpy scipy matplotlib tqdm jupyter
+   conda install torch numpy scipy matplotlib tqdm jupyter ipywidgets widgetsnbextension
    ```
 
 ## Running the Notebooks in VS Code
