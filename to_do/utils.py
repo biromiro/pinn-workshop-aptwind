@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from IPython.display import HTML
 from tqdm.notebook import tqdm, trange
-from clawpack.riemann.euler_1D_py import euler_hllc_1D
 import numpy as np
 import scipy.io
 import os
