@@ -58,7 +58,7 @@ Optional but recommended:
    Or using Conda:
 
    ```bash
-   conda env create -f environment.yml
+   conda env create --name pinn-workshop
    conda activate pinn-workshop
    ```
 
@@ -73,7 +73,7 @@ Optional but recommended:
    or, with conda:
 
    ```bash
-   conda install torch numpy scipy matplotlib tqdm jupyter ipywidgets widgetsnbextension
+   conda install pytorch numpy scipy matplotlib tqdm jupyter ipywidgets widgetsnbextension
    ```
 
 ## Running the Notebooks in VS Code
