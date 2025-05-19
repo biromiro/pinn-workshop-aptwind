@@ -58,7 +58,7 @@ Optional but recommended:
    Or using Conda:
 
    ```bash
-   conda env create --name pinn-workshop
+   cconda create --name pinn-workshop
    conda activate pinn-workshop
    ```
 
