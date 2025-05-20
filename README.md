@@ -25,7 +25,7 @@ This repository contains a hands-on workshop on implementing Physics-Informed Ne
 
 ## Prerequisites
 
-* **Python 3.12+**
+* **Python 3.11+**
 * **Git**
 * **Visual Studio Code** with the following extensions:
 
