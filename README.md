@@ -60,7 +60,7 @@ Optional but recommended:
    Or using Conda:
 
    ```bash
-   cconda create --name pinn-workshop
+   conda create --name pinn-workshop
    conda activate pinn-workshop
    ```
 
