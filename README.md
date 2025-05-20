@@ -1,6 +1,8 @@
 # Physics-Informed Neural Networks - Workshop for ML4SCIENCE & ENGINEERING SUMMER SCHOOL by @inductiva
 
-This repository contains a hands-on workshop on implementing Physics-Informed Neural Networks (PINNs) in PyTorch for the ML4SCIENCE & ENGINEERING SUMMER SCHOOL, organized by Inductiva.ai @FEUP. You will solve both a forward problem (Burgers' equation) and an inverse problem (1D Euler equations) via Jupyter notebooks.
+This repository contains a hands-on workshop on implementing Physics-Informed Neural Networks (PINNs) in PyTorch for the [ML4SCIENCE & ENGINEERING SUMMER SCHOOL](https://inductiva.ai/events/machine-learning-summer-school), organized by Inductiva.ai @FEUP. You will solve both a forward problem (Burgers' equation) and an inverse problem (1D Euler equations) via Jupyter notebooks.
+
+> Adapted from TUM Physics-Informed Machine Learning lab session on "Physics-Informed Machine Learning", @tummfm
 
 ## Repository Structure
 
@@ -23,7 +25,7 @@ This repository contains a hands-on workshop on implementing Physics-Informed Ne
 
 ## Prerequisites
 
-* **Python 3.12+**
+* **Python 3.11+**
 * **Git**
 * **Visual Studio Code** with the following extensions:
 
@@ -58,7 +60,7 @@ Optional but recommended:
    Or using Conda:
 
    ```bash
-   cconda create --name pinn-workshop
+   conda create --name pinn-workshop
    conda activate pinn-workshop
    ```
 
